@@ -7,6 +7,16 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.squareup.okhttp.Call;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.FormEncodingBuilder;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
+
+import java.io.IOException;
+
 public class SignUpActivity extends AppCompatActivity {
 
     //Explicit การประกาศตัวแปร
@@ -15,6 +25,8 @@ public class SignUpActivity extends AppCompatActivity {
     private RadioButton avata0RadioButton, avata1RadioButton, avata2RadioButton,
             avata3RadioButton, avata4RadioButton;
     private String nameString, userString, passwordString, AvataString;
+    private static final String urlPHP = "http://swiftcodingthai.com/rus/add_user_master.php";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +91,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         } else if (checkChoose()) {
             //Check
+            updateNewUserToServer();
         } else {
             //Un Check
             MyAlert myAlert = new MyAlert();
@@ -90,6 +103,34 @@ public class SignUpActivity extends AppCompatActivity {
 
 
     }//clickSignUp
+
+    private void updateNewUserToServer() {
+
+        OkHttpClient okHttpClient = new OkHttpClient();
+        RequestBody requestBody = new FormEncodingBuilder()
+                .add("isAdd", "true")
+                .add("Name", nameString)
+                .add("User", userString)
+                .add("Password", passwordString)
+                .add("Avata", AvataString)
+                .build();
+        Request.Builder builder = new Request.Builder();
+        Request request = builder.url(urlPHP).post(requestBody).build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+
+                finish();
+            }
+        });
+
+    }//update
 
     private boolean checkChoose() {
 
