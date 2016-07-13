@@ -29,11 +29,19 @@ public class MainActivity extends AppCompatActivity {
 
         //Load Image from Server
         Picasso.with(this).load(urlLogo).into(imageView);
-
     }   // Main Method
+
+    public void clickSignIn(View view) {
+
+
+
+    }//click sign
 
     public void clickSignUpMain(View view) {
         startActivity(new Intent(MainActivity.this, SignUpActivity.class));
     }
+
+
+
 
 }   // Main Class นี่คือ คลาสหลัก เว้ยเห้ย
