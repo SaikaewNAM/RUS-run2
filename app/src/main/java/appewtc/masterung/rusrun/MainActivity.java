@@ -118,6 +118,9 @@ public class MainActivity extends AppCompatActivity {
                 } else if (myPasswordString.equals(truePassword)) {
                     //Password True
                     Toast.makeText(context, "Welcome" + myNameString, Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+                    startActivity(intent);
                 } else {
                     //Password False
                     MyAlert myAlert = new MyAlert();
