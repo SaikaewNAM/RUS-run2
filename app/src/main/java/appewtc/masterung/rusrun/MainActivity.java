@@ -123,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(context, "Welcome" + myNameString, Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+                        intent.putExtra("loginID", myIDString);
                         startActivity(intent);
                     } else {
                         //Password False
